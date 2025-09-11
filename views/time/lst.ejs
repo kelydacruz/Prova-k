@@ -1,28 +1,30 @@
 <%-include('../cabecalho.ejs')%>
-    <h1>Alunos</h1>
+    <h1>🏆 TIMES</h1>
     <div>
         <form action="
         " method="post">
         <input type="text" name="filtro"
-         id="" placeholder="digite o nome">
+         id="" placeholder="Pesquisar...">
          <button type="submit">Pesquisar</button>
     </form>
     </div>
-    <a href="/aluno/add">+ Aluno</a>
+        <a href="/time/add">+ Novo Time</a>
     <table>
         <tr>
             <td>Nome</td>
-            <td>Matrícula</td>
+            <td>Cidade</td>
             <td>Ações</td>
         </tr>
       
-        <%for (const {id, nome, matricula} of Alunos) {%>
+      
+        <%for (const {id, nome, cidade} of Times) {%>
         <tr>
             <td><%=nome%></td>
-            <td><%=matricula%></td>
-            <td><a href="/aluno/edt/<%=id%>">Editar</a>
-            <a href="/aluno/del/<%=id%>">Excluir</a></td>
+            <td><%=cidade%></td>
+
+            <td><a href="/time/edt/<%=id%>">Editar</a>
+            <a href="/time/del/<%=id%>">Excluir</a></td>
         </tr>
         <%}%>
     </table>
- <%-include('../rodape.ejs')%>
+ <%-include('../rodape.ejs')%> 

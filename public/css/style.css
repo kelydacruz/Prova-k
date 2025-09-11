@@ -60,7 +60,6 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
   /* Estilos dos Botões */
   .btn {
     display: inline-block;
@@ -74,7 +73,7 @@ body {
   }
   
   .btn {
-    background-color: #28a745;
+    background-color: #1c57af;
     color: #fff;
   }
   

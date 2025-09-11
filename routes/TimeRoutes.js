@@ -1,10 +1,10 @@
 import express from 'express';
 const router = express.Router();
-//Busca o GeneroController
-import GeneroController from '../controllers/GeneroController.js'
-const controle = new GeneroController();
 
-const caminhobase =  'genero/'
+import TimeController from '../controllers/TimeController.js'
+const controle = new TimeController();
+
+const caminhobase =  'time/'
 
 router.get('/' + caminhobase + 'add', controle.openAdd)
 router.post('/' + caminhobase + 'add', controle.add)

@@ -1,8 +1,8 @@
-import Jogo from '../models/jogo.js'
+import Time from '../models/time.js'
 
-export default class JogoController{
-
-    constructor(caminhoBase='jogo/'){
+export default class TimeController{ 
+   
+    constructor(caminhoBase='time/'){
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
@@ -10,48 +10,43 @@ export default class JogoController{
         }
         this.add = async(req, res)=>{
            
-            await Jogo.create({
+            await Time.create({
                 nome: req.body.nome,
-                ano: req.body.ano,
-                genero: req.body.genero,
-                desenvolvedor: req.body.desenvolvedor,
-                classificacao: req.body.classificacao,
-                plataforma: req.body.plataforma,
-                preco: req.body.preco
+                cidade: req.body.cidade
             });
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Jogo.find({})
-            res.render(caminhoBase + 'lst', {Jogos:resultado})
+            const resultado = await Time.find({})
+            res.render(caminhoBase + 'lst', {Times:resultado})
         }
         this.find = async(req, res)=>{
             const filtro = req.body.filtro;
             const resultado = await 
-            Jogo.find({ nome: { $regex: filtro,
+            Time.find({ nome: { $regex: filtro,
                 $options: "i" }})
-            res.render(caminhoBase + 'lst', {Jogo:resultado})
+            res.render(caminhoBase + 'lst', {Times:resultado})
         }
 
          this.openEdt = async(req, res)=>{
             //passar quem eu quero editar
             const id = req.params.id
             console.log(id)
-            const jogo = await Jogo.findById(id) 
-            console.log(jogo)
+            const time = await Time.findById(id) 
+            console.log(time)
             res.render(caminhoBase + "edt", 
-                {Jogo:jogo})
+                {Time:time})
         }
 
 
         this.edt = async(req, res)=>{
-        await Jogo.findByIdAndUpdate(req.params.id, req.body)
+        await Time.findByIdAndUpdate(req.params.id, req.body)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
 
          this.del = async(req, res)=>{
-        await Jogo.findByIdAndDelete(req.params.id)
+        await Time.findByIdAndDelete(req.params.id)
         res.redirect('/'+caminhoBase + 'lst');
         
         }

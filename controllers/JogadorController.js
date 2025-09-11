@@ -1,59 +1,58 @@
-//importar o Model
-import Aluno from '../models/aluno.js'
+import Jogador from '../models/jogador.js'
 
-export default class AlunoController{
-
-    constructor(caminhoBase='aluno/'){
+export default class JogadorController{ 
+   
+    constructor(caminhoBase='jogador/'){
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
             res.render(caminhoBase + "add")
         }
         this.add = async(req, res)=>{
-            //cria o Aluno
            
-            await Aluno.create({
+            await Jogador.create({
                 nome: req.body.nome,
-                matricula:req.body.matricula
+                time: req.body.time,
+                posicao: req.body.posicao,
+                idade: req.body.idade,
+                altura: req.body.altura
             });
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Aluno.find({})
-            res.render(caminhoBase + 'lst', {Alunos:resultado})
+            const resultado = await Jogador.find({})
+            res.render(caminhoBase + 'lst', {Jogadores:resultado})
         }
         this.find = async(req, res)=>{
             const filtro = req.body.filtro;
             const resultado = await 
-            Aluno.find({ nome: { $regex: filtro,
+            Jogador.find({ nome: { $regex: filtro,
                 $options: "i" }})
-            res.render(caminhoBase + 'lst', {Alunos:resultado})
+            res.render(caminhoBase + 'lst', {Jogadores:resultado})
         }
-
-     
 
          this.openEdt = async(req, res)=>{
             //passar quem eu quero editar
             const id = req.params.id
             console.log(id)
-            const aluno = await Aluno.findById(id) 
-            console.log(aluno)
+            const jogador = await Jogador.findById(id) 
+            console.log(jogador)
             res.render(caminhoBase + "edt", 
-                {Aluno:aluno})
+                {Jogador:jogador})
         }
 
 
         this.edt = async(req, res)=>{
-        await Aluno.findByIdAndUpdate(req.params.id, req.body)
+        await Jogador.findByIdAndUpdate(req.params.id, req.body)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
 
          this.del = async(req, res)=>{
-        await Aluno.findByIdAndDelete(req.params.id)
+        await Jogador.findByIdAndDelete(req.params.id)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
 
-    }
+    } 
 }
